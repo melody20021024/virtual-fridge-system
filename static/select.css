@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=UoqMunThenKhung&family=Yomogi&family=Zen+Kurenaido&display=swap');
+
+body {
+  font-family: "Zen Kurenaido", sans-serif;
+  background-color: #FFF8F0;
+  color: #333;
+  margin: 0;
+  padding: 30px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #d45c00;
+  margin-bottom: 10px;
+  font-family: "UoqMunThenKhung", cursive;
+}
+
+.subhint {
+  text-align: center;
+  font-size: 1rem;
+  color: #999;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+/* 分類區塊 */
+.category-block {
+  margin-bottom: 40px;
+}
+
+.category-block h3 {
+  background-color: #FFECD2;
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  font-weight: bold;
+  color: #d45c00;
+  font-size: 1.2rem;
+  font-family: "UoqMunThenKhung", cursive;
+  margin-bottom: 12px;
+}
+
+/* checkbox 群組排版 */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;              /* 元素間距 */
+  justify-content: flex-start;  /* ⬅️ 從左對齊 */
+  align-items: flex-start;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+
+/* 單個 checkbox 選項 */
+.checkbox-item {
+  background-color: #fff;
+  border: 2px dashed #FFCD8C;
+  border-radius: 16px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-item:hover {
+  background-color: #FFF0D5;
+  transform: scale(1.05);
+}
+
+.checkbox-item input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+.checkbox-item input[type="checkbox"]:checked + span {
+  font-weight: bold;
+  color: #d45c00;
+}
+
+
+/* 查詢按鈕 */
+button[type="submit"] {
+  display: block;
+  margin: 0 auto;
+  background-color: #FFA366;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+button[type="submit"]:hover {
+  background-color: #FF8A3D;
+  transform: scale(1.05);
+}
+
+/* --- 左上返回按鈕樣式 --- */
+.back-button {
+  text-decoration: none;     /* 去掉底線 */
+  display: flex;             /* 圖片和文字橫向排列 */
+  align-items: center;
+  gap: 6px;                  /* 圖片和文字間距 */
+  margin-bottom: 20px;
+}
+
+/* 返回圖示 */
+.back-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* 返回文字（可愛字體） */
+.back-text {
+  font-family: "Caveat"; /* ✅ 可愛圓體備援組 */
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #444;
+}
+
+/* 滑過時圖示微放大 */
+.back-button:hover .back-icon {
+  transform: scale(1.1);
+}
+
+/* 回到頂端按鈕（固定右下角） */
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #FFCD8C;
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 101;
+}
+
+.scroll-top:hover {
+  background-color: #FFDCA7;
+}
+
+/* 左下角返回按鈕固定 */
+.back-bottom {
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+  background-color: #ccc;
+  color: #444;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.2s;
+  font-family: "Caveat", cursive;
+}
+
+.back-bottom:hover {
+  background-color: #bbb;
+}

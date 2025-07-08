@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=UoqMunThenKhung&family=Yomogi&display=swap');
+
+body {
+  font-family: "Caveat", sans-serif;
+  background-color: #fff8f0;
+  padding: 30px;
+  color: #333;
+}
+
+/* 🧊 卡片主體 */
+.recipe-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.recipe-card:hover {
+  transform: scale(1.01);
+}
+
+/* 🖼 左側圖片 */
+.recipe-image {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* 📄 右側文字區 */
+.recipe-info {
+  padding: 20px;
+  flex: 1;
+}
+
+.recipe-info h2 {
+  margin: 0;
+  color: #d45c00;
+  font-size: 1.2em;
+}
+
+.recipe-info p {
+  margin: 10px 0;
+  color: #555;
+}
+
+/* ✅ 按鈕群組區塊 */
+.button-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* 🔘 所有按鈕共通樣式 */
+.btn {
+  padding: 10px 16px;
+  font-size: 0.95em;
+  font-weight: bold;
+  border: none;
+  border-radius: 24px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 🔗 查看完整食譜按鈕 */
+.btn-view {
+  background-color: #FFB085;
+  color: white;
+}
+.btn-view:hover {
+  background-color: #ff9a66;
+}
+
+/* 🍳 我想煮這道菜按鈕 */
+.btn-do {
+  background-color: #ffd480;
+  color: #333;
+}
+.btn-do:hover {
+  background-color: #ffca55;
+}
+
+/* 單一推薦按鈕固定右下角上方 */
+.button-row {
+  bottom: 80px;         /* 預留給回頂端鍵 */
+  right: 20px;
+  z-index: 100;
+}
+
+/* 美化推薦按鈕 */
+.btn-primary {
+  background-color: #FFA366;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 12px 18px;
+  border-radius: 20px;
+  font-size: 1rem;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #FF8A3D;
+}
+
+/* 回到頂端按鈕（固定右下角） */
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #FFCD8C;
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 101;
+}
+
+.scroll-top:hover {
+  background-color: #FFDCA7;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  width: fit-content;
+  /*width: 32px;   /* ✅ 調小這裡 */
+  height: 32px;  /* ✅ 調小這裡 */
+  cursor: pointer;
+}
+
+.back-icon {
+  width: 28px;                  /* 可以再微調大小 */
+  height: 28px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover .back-icon {
+  transform: scale(1.1);
+}
+
+.back-text {
+  font-family: "Caveat"; /* ✅ 可愛圓體備援組 */
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #444;
+}

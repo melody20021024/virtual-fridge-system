@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>缺少食材確認</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; background-color: #fffaf2; }
+        h1 { color: #d35400; }
+        .missing-box {
+            padding: 1rem;
+            background-color: #fff3e0;
+            border: 1px solid #ffa726;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+        label { display: block; margin-bottom: 0.5rem; }
+        button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #66bb6a;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #558b2f;
+        }
+        
+        body {
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+        to { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>這些食材冰箱裡找不到 😢</h1>
+
+<p>請取消勾選你其實有庫存的食材：</p>
+
+<form method="POST" action="/confirm_missing" class="missing-box">
+    {% for item in missing %}
+        <label>
+            <input type="checkbox" name="missing" value="{{ item }}" checked>
+            {{ item }}
+        </label>
+    {% endfor %}
+    <button type="submit">✅ 確認這些真的缺</button>
+</form>
+
+</body>
+</html>

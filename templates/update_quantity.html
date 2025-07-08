@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>填寫食材使用狀況</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='update_quantity.css') }}">
+    <style>
+        body {
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+        to { opacity: 1; }
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="note-box">
+  <img src="{{ url_for('static', filename='use.png') }}" alt="備註框" class="note-bg">
+  <p class="note-text">請填寫食材使用狀況</p>
+</div>
+
+
+<form method="POST" action="/apply_update">
+    {% for item in matched %}
+    <div class="form-row">
+        <label>{{ item.name }}（目前庫存：{{ item.quantity }}）</label>
+        <div class="mode-select">
+            <input type="radio" name="mode_{{ item.name }}" value="used" checked> 已使用數量
+            <input type="radio" name="mode_{{ item.name }}" value="left"> 寫入剩餘數量
+        </div>
+        <input type="text" name="value_{{ item.name }}" placeholder="輸入數量...">
+    </div>
+    {% endfor %}
+    <button type="submit">✅ 更新庫存</button>
+</form>
+
+<a href="/index" class="back-bottom">← 回冰箱</a>
+
+</body>
+</html>

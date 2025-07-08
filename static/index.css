@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=UoqMunThenKhung&family=Yomogi&display=swap');
+
+.page-layout {
+  padding: 20px;
+  position: relative;
+  background-color: #fff8f0;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  width: fit-content;
+  /*width: 32px;   /* ✅ 調小這裡 */
+  height: 32px;  /* ✅ 調小這裡 */
+  cursor: pointer;
+}
+
+.back-icon {
+  width: 28px;                  /* 可以再微調大小 */
+  height: 28px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover .back-icon {
+  transform: scale(1.1);
+}
+
+.back-text {
+  font-family: "Caveat"; /* ✅ 可愛圓體備援組 */
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #444;
+}
+
+.main-grid {
+  display: flex;
+}
+
+.input-panel {
+  flex: 1;
+  position: relative; /* ⬅️ 必須設定 position 才能加 ::before */
+  padding: 20px;
+  z-index: 1;
+}
+
+.input-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('/static/fridge-background.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2;  /* ⬅️ 調整透明度（0.1 ~ 0.3 之間建議） */
+  border-radius: 16px;
+  z-index: 0;
+}
+
+.input-panel form {
+  position: relative;
+  z-index: 1;
+}
+
+.input-panel h2 {
+  margin-top: 0;
+  color: #d45c00;
+  text-align: center;
+}
+
+.fridge-shelf {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.fridge-shelf label {
+  font-family: "Yomogi";
+  font-weight: bold;
+  color: #333;
+}
+
+.fridge-shelf input,
+.fridge-shelf select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.add-button {
+  display: block;              /* 讓按鈕變成獨立一行（非 inline） */
+  margin-left: auto;           /* 左邊自動推開，讓它靠右 */
+  margin-right: 0;             /* 右邊貼齊 */
+  background-color: #ffa366;   /* 背景橘色 */
+  color: white;                /* 文字白色 */
+  border: none;                /* 移除邊框 */
+  padding: 12px 20px;          /* 上下 12px、左右 20px 的內距 */
+  border-radius: 12px;         /* 圓角按鈕 */
+  font-size: 1em;              /* 字體大小 */
+  font-weight: bold;           /* 字體加粗 */
+  cursor: pointer;             /* 滑鼠移過去會變成手指 */
+  transition: background-color 0.3s ease;  /* hover 時平滑變色效果 */
+  margin-top: 12px;  /* 或 16px，讓它和上面欄位有空隙 */
+}
+
+
+.add-button:hover {
+  background-color: #ff8a3d;
+}
+
+.fridge-contents {
+  flex: 2;
+  background-color: #fff8f0;
+  padding: 40px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.bottom-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.recommend-btn {
+  background-color: #FFB085;
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  padding: 12px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+
+.fridge-contents h3 {
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+  font-weight: bold;
+  color: #d45c00;
+}
+
+.fridge-contents h3 {
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+  font-weight: bold;
+  color: #d45c00;
+}
+
+.fridge-contents ul {
+  margin-top: 0;
+  padding-left: 1.2em;
+}
+
+.fridge-contents h3,
+.fridge-contents ul {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.delete-btn {
+  background-color: #fff;
+  color: #d45c00;
+  border: 1.5px solid #ffb085;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.75em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15); /* 立體感陰影 */
+  transition: 0.2s ease;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.delete-btn:hover {
+  background-color: #ffb085;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* 頁面轉場動畫：向右翻轉蓋上門 */
+@keyframes flipOut {
+  0% {
+    transform: rotateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(90deg);
+    opacity: 0;
+  }
+}
+
+/* 應用在整個頁面容器 */
+.flip-out {
+  animation: flipOut 0.6s ease forwards;
+  transform-origin: left center; /* 從左邊開始翻 */
+}

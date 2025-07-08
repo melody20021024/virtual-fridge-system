@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>🍳 select</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='select.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+  <style>
+  body {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  </style>
+
+</head>
+<body>
+        <!-- 左上返回鍵 -->
+  <div class="top-bar">
+    <a href="/recommend" class="back-button">
+    <img src="/static/return.jpg" alt="返回" class="back-icon">
+    <span class="back-text">Back</span>
+    </a>
+  </div>
+  <h1>🍱 選擇你想用的食材</h1>
+  <p class="subhint">從冰箱裡挑出想使用的食材 ! ✨</p>
+
+  <form method="POST" action="/select">
+    {% for category, items in categorized.items() %}
+      <div class="category-block">
+        <h3>
+          {% if category == '肉類' %}🥩
+          {% elif category == '海鮮' %}🐟
+          {% elif category == '蔬菜' %}🥬
+          {% elif category == '調味料' %}🧂
+          {% else %}🍱
+          {% endif %}
+          {{ category }}
+        </h3>
+        <div class="checkbox-group">
+          {% for ingredient in items %}
+            <label class="checkbox-item">
+              <input type="checkbox" name="ingredients" value="{{ ingredient }}">
+              <span>{{ ingredient }}</span>
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+    <button type="submit">🔍 查詢推薦食譜</button>
+  </form>
+
+<a href="/index" class="back-bottom">← 回冰箱</a>
+
+<!-- 回頂端按鈕 -->
+    <button class="scroll-top" onclick="scrollToTop()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m296-224-56-56 240-240 240 240-56 56-184-183-184 183Zm0-240-56-56 240-240 240 240-56 56-184-183-184 183Z"/></svg></button>
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener("scroll", () => {
+            const btn = document.getElementById("scrollTopBtn");
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = window.innerHeight;
+
+            if (scrollTop + clientHeight >= scrollHeight - 20) {
+            btn.style.display = "block";
+            btn.style.position = "fixed";
+            btn.style.bottom = "20px";
+            btn.style.right = "20px";
+            } else {
+            btn.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>

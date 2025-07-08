@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='welcome_style.css') }}">
+</head>
+<body class="welcome-page">
+  <div class="welcome-container">
+    <h1 class="welcome-text">
+      Welcome to<br>
+    <span class="tabbed-text">your register</span>
+    </h1>
+    <a href="#" class="enter-button fade-in-delay" id="enterButton">進入冰箱 →</a>
+  </div>
+      <script>
+    document.getElementById('enterButton').addEventListener('click', function (e) {
+        e.preventDefault(); // 阻止立即跳轉
+        document.body.classList.add('slide-out'); // 加上動畫 class
+
+        // 600ms 後再跳轉頁面
+        setTimeout(function () {
+        window.location.href = "{{ url_for('index') }}";
+        }, 600);
+    });
+    </script>
+</body>
+</html>

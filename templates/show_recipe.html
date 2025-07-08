@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>食譜內容</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #fffaf2; margin: 2rem;        opacity: 0;
+        animation: fadeIn 0.5s ease forwards; }
+        h1 { color: #d35400; }
+        .recipe-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 1rem;
+            background-color: #fff;
+            max-width: 600px;
+        }
+        .recipe-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-right: 1rem;
+            border-radius: 8px;
+        }
+        .recipe-info {
+            display: flex;
+            align-items: center;
+        }
+        .recipe-text {
+            flex-grow: 1;
+        }
+        .btn {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background-color: #66bb6a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #558b2f;
+        }
+
+        @keyframes fadeIn {
+        to { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>完整食譜</h1>
+
+<div class="recipe-card">
+  <div class="recipe-info">
+    <img src="{{ recipe.image }}" alt="食譜圖片">
+    
+    <div class="recipe-text">
+      <h2>{{ recipe.title }}</h2>
+      <p>{{ recipe.ingredients }}</p>
+      <a href="{{ recipe.link }}" target="_blank">🔗 查看完整食譜</a>
+    </div>
+
+    <!-- ✅ 新增：右側快速跳轉按鈕 -->
+    <div onclick="window.location.href='/update_quantity'"
+         style="margin-left: 1rem; padding: 0.6rem 1.2rem;
+                background-color: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(4px);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                border-radius: 16px;
+                color: #444;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                transition: transform 0.2s ease, box-shadow 0.2s;"
+                color: white; border-radius: 8px; cursor: pointer; font-weight: bold;">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m242-200 200-280-200-280h98l200 280-200 280h-98Zm238 0 200-280-200-280h98l200 280-200 280h-98Z"/></svg>
+    </div>
+  </div>
+</div>
+
+<a href="/" class="btn" style="position: fixed; bottom: 20px; left: 20px; z-index: 100;
+          background-color: #ccc; color: #444; padding: 0.5rem 1rem;
+          border-radius: 20px; text-decoration: none; font-weight: bold;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1); transition: background-color 0.2s;
+          font-family: 'Caveat', cursive; margin-top: 1rem;">← 回冰箱</a>
+
+
+<script>
+  // 放大動畫（可直接寫 style 裡）
+  document.querySelectorAll('[onclick*="/update_quantity"]').forEach(btn => {
+    btn.onmouseover = () => {
+      btn.style.transform = 'scale(1.08)';
+      btn.style.backgroundColor = '#ffa726';
+      btn.style.color = 'white';
+    };
+    btn.onmouseout = () => {
+      btn.style.transform = 'scale(1)';
+      btn.style.backgroundColor = 'rgba(255, 167, 38, 0.2)';
+      btn.style.color = '#e67e22';
+    };
+  });
+</script>
+</body>
+</html>

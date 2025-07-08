@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    
+<head>
+  <meta charset="UTF-8">
+  <title>虛擬冰箱</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+</head>
+<body onload="openFridge()">
+  <div class="page-layout">
+    <!-- 左上返回鍵 -->
+    <div class="top-bar">
+      <a href="/welcome" class="back-button">
+        <img src="/static/return.jpg" alt="返回" class="back-icon">
+         <span class="back-text">Back</span>
+</a>
+    </div>
+
+    <div class="main-grid">
+      <!-- 左邊：輸入區 -->
+      <div class="input-panel fridge-door animate-door">
+        <form method="POST" action="/add">
+            
+          <div class="fridge-shelf">
+            <label>食材名稱</label>
+            <input type="text" name="name" required>
+          </div>
+          <div class="fridge-shelf">
+            <label>分類</label>
+            <select name="category" required>
+              <option value="肉類">肉類</option>
+              <option value="海鮮">海鮮</option>
+              <option value="蔬菜">蔬菜</option>
+              <option value="調味料">調味料</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+          <div class="fridge-shelf">
+            <label>數量</label>
+            <input type="text" name="quantity">
+          </div>
+          <div class="fridge-shelf">
+            <label>過期</label>
+            <input type="date" name="expiry">
+          </div>
+          <button class="add-button" type="submit">+ 新增食材 + </button>
+        </form>
+      </div>
+
+      <!-- 右邊：目前冰箱內容 -->
+      <div class="fridge-contents">
+        {% for category, items in categorized.items() %}
+          <h3>{{ category }}</h3>
+          <ul>
+            {% for item in items %}
+              {% if item[3]|float > 0 %}
+              <li>
+                {{ item[1] }}（數量：{{ item[3] }}，過期日：{{ item[4] or "未設定" }}）
+                <form action="/delete/{{ item[0] }}" method="POST" style="display:inline;">
+                  <button type="submit" class="delete-btn">✖</button>
+                </form>
+              </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- 右下搜尋推薦按鈕 -->
+    <div class="bottom-right">
+    <form id="goForm" method="POST" onsubmit="return false;">
+      <button type="button" class="recommend-btn" onclick="handleRecommend()">📌 搜尋食譜</button>
+    </form>
+    </div>
+  </div>
+
+  <script>
+    function openFridge() {
+      document.querySelector('.fridge-door').classList.add('opened');
+    }
+
+    function handleRecommend() {
+      {% if near_expiry %}
+        let answer = confirm("{{ near_expiry|join('、') }} 即將過期，是否要立即查詢相關食譜？");
+        if (answer) {
+          document.getElementById("goForm").action = "/recommend";
+          document.getElementById("goForm").submit();  // ✅ 確定才 submit（POST）
+        } else {
+          window.location.href = "/select";             // ✅ 取消直接導頁面（GET）
+        }
+      {% else %}
+        window.location.href = "/select";
+      {% endif %}
+    }
+  </script>
+  <script>
+  function relocateFridgeContents() {
+    const inputPanel = document.querySelector('.input-panel');
+    const mainGrid = document.querySelector('.main-grid');
+    const fridgeContents = document.querySelector('.fridge-contents');
+
+    if (!inputPanel || !mainGrid || !fridgeContents) return;
+
+    const shouldMoveToInput = window.innerWidth < 768;
+
+    // 若螢幕變小，要放進 inputPanel
+    if (shouldMoveToInput && fridgeContents.parentElement !== inputPanel) {
+      inputPanel.appendChild(fridgeContents);
+    }
+
+    // 若螢幕變大，要放回 mainGrid
+    if (!shouldMoveToInput && fridgeContents.parentElement !== mainGrid) {
+      mainGrid.appendChild(fridgeContents);
+    }
+  }
+
+  window.addEventListener('resize', relocateFridgeContents);
+  window.addEventListener('DOMContentLoaded', relocateFridgeContents);
+</script>
+
+
+</body>
+</html>
